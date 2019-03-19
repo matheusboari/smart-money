@@ -17,7 +17,6 @@ class UsersService {
         } else {
             return { status: false }
         }
-
     }
 }
 

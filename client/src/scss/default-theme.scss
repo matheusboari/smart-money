@@ -1,2 +1,23 @@
 @import '~styles/reset';
 
+.input {
+    width: 100%;
+    padding: 0 15px;
+    height: 40px;
+    border-radius: 4px;
+    outline: none;
+}
+.btn-primary {
+    border: none;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 10px;
+    outline: none;
+    background: #69D2E7;
+    transition: background .3s;
+    cursor: pointer;
+    color: white;
+    &:hover {
+        background: rgb(82, 186, 207);
+    }
+}
