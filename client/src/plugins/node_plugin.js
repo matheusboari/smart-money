@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-export const http = axios.create({
-	baseURL: 'https://api.bcb.gov.br/'
+export const node = axios.create({
+	baseURL: 'http://localhost:5001/api/v1/'
 })
 
 export default function install (Vue) {
-	Object.defineProperty(Vue.prototype, '$http', {
+	Object.defineProperty(Vue.prototype, '$node', {
 		get () {
-			return http
+			return node
 		}
 	})
 }

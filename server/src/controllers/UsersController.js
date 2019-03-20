@@ -2,13 +2,15 @@ import UsersService from '../services/UsersService'
 
 class UsersController {
   async register (req, res) {
-    let user = await UsersService.register(req.body)
+    let result = await UsersService.register(req.body)
     
-    res.json(user)
+    res.json(result)
   }
 
   async login (req, res) {
-    res.json({ 'status': 'off' })
+    let user = await UsersService.login(req.body)
+    
+    res.json(user)
   }
 
   async update (req, res) {
