@@ -3,11 +3,26 @@ import mongoose from '../db/mongoose'
 const Schema = mongoose.Schema
 export default mongoose.model('users',
   new Schema({
-    nome: String,
+    name: String,
     login: String,
-    senha: String,
-    data_nascimento: Number,
+    birthdayDate: Number,
+    password: String,
     email: String,
-    foto_perfil: String
+    wallet: [{
+      value: Number,
+      paper: {
+        name: String,
+        discount: [{
+          type: String,
+          value: Number
+        }]
+      },
+      indexer: {
+        name: String,
+        indicator: Number
+      },
+      startDate: Number,
+      endDate: Number
+    }]
   }),
-  'users')
+'users')
