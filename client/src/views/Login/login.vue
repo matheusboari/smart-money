@@ -1,15 +1,22 @@
 <template>
     <div class="body">
-        <login-card v-if="!register">
-            <template slot="register-btn">
-                <span class="span-switch" @click="register = true">Ou registre-se</span>
-            </template>
-        </login-card>
-        <register-card v-else>
-            <template slot="login-btn">
-                <span class="span-switch" @click="register = false">Login</span>
-            </template>
-        </register-card>
+        <div class="cards-wrap">
+            <login-card v-if="!register">
+                <template slot="register-btn">
+                    <span class="span-switch">Você não tem uma conta? <span class="switch" @click="register = true">registre-se</span></span>
+                </template>
+            </login-card>
+            <register-card v-else>
+                <template slot="login-btn">
+                    <span class="span-switch">Já tem uma conta? <span class="switch" @click="register = false"> faça login</span></span>
+                </template>
+            </register-card>
+            <div class="background-wrap">
+                <img src="../../assets/logo-white.png" class="logo" alt="">
+                <span class="info">A Smart Money é um sistema de ensino e informação para investidores em renda fixa. 
+                    Além de contar com trilhas de ensino e calculadora financeira!</span>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -32,28 +39,52 @@ export default {
 
 <style lang="scss" scoped>
 .body {
-    background-image: url('../../assets/background-login.jpg');
     width: 100%;
     height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    &::before {
-        content: ' ';
-        background: rgba(0, 46, 24, 0.75);
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
     display: flex;
     align-items: center;
     justify-content: center;
-    >.form {
-        position: relative;
+}
+.cards-wrap {
+    display: flex;
+    >.background-wrap {
+        width: 500px;
+        height: 500px;
+        border-radius: 0 30px 30px 0;
+        background-image: url('../../assets/background-login.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 30px;
+        &::before {
+            content: ' ';
+            width: 500px;
+            height: 500px;
+            background: #27333c85;
+            position: absolute;
+            border-radius: 0 30px 30px 0;
+        }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        >.logo {
+            position: relative;
+            width: 100px;
+            margin-bottom: 10px;
+        }
+        >.info {
+            position: relative;
+            color: white;
+            text-align: center;
+        }
     }
 }
 .span-switch {
-    color: white;
-    cursor: pointer;
+    color: #27333c;
+    >.switch {
+        cursor: pointer;
+        font-weight: bold;
+    }
     font-style: italic;
 }
 </style>

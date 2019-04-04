@@ -1,9 +1,12 @@
 <template>
     <div class="form login">
-        <h1 class="title">Login</h1>
-        <input class="input" type="text" name="user" placeholder="Login" v-model="username" />
-        <input class="input" type="password" name="pass" placeholder="Password" v-model="password" />
-        <button class="btn-primary" @click="login()">Login</button>
+        <h3 class="title">Bem vindo ao</h3>
+        <img src="../../../assets/logo.png" class="logo" alt="">
+        <span class="info">Faça login e tenha acesso ilimitado aos recursos que a Smart Money disponibiliza.</span>
+        <b-input class="input" v-model="username" placeholder="Login" />
+        <b-input type="password" class="input" v-model="password" placeholder="Senha" />
+
+        <b-button class="btn" @click="login()" variant="primary">Login</b-button>
         <slot name="register-btn"></slot>
     </div>
 </template>
@@ -50,14 +53,29 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 30px 0 0 30px;
+    padding: 40px;
+    width: 500px;
+    height: 500px;
+    box-shadow: 0px 1px 10px -1px rgba(0,0,0,0.4);
     >.title {
-        color: white;
-        margin-bottom: 30px;
+        font-size: 1.3em;
+        font-style: italic;
+        color: #27333c;
+        margin: 0;
     }
-    >.input {
-        margin-bottom: 10px;
+    >.info {
+        width: 70%;
+        text-align: center;
+        opacity: .75;
+        margin-bottom: 20px;
     }
-    >.btn-primary {
+    >.logo {
+        width: 100px;
+        margin: 10px 0;
+    }
+    >.input, .btn {
+        width: 70%;
         margin-bottom: 10px;
     }
 }
