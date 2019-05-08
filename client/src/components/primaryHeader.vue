@@ -74,4 +74,13 @@ export default {
         }
     }
 }
+
+@media only screen and (max-width: 550px) {
+    .header-wrapper {
+        grid-template-rows: 80px;
+        >.nav-wrapper {
+            display: none;
+        }
+    }
+}
 </style>

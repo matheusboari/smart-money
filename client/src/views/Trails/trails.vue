@@ -64,7 +64,12 @@ export default {
         box-sizing: border-box;
         cursor: pointer;
         margin: 0 10px;
-        transition: width .5s linear, height .5s linear;
+        transition: width .2s linear, height .2s linear;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, .15);
+        &:hover {
+            width: 295px;
+            height: 295px;
+        }
         >.title {
             font-size: 2.5em;
             line-height: 30px;
@@ -88,6 +93,16 @@ export default {
         border-radius: 0;
         z-index: 5;
         >.title, >.subtitle { opacity: 0; }
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .trails-content-wrapper {
+        margin-top: 20px;
+        flex-direction: column;
+        >.novice-investor-button, >.intermediate-investor-button, >.advanced-investor-button {
+            margin: 10px 0;
+        }
     }
 }
 </style>
