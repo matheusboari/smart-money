@@ -3,6 +3,9 @@ import Router from 'vue-router'
 
 import login from '../views/Login/login.vue'
 import trails from '../views/Trails/trails.vue'
+import novice from '../views/Trails/novice.vue'
+import intermediate from '../views/Trails/intermediate.vue'
+import advanced from '../views/Trails/advanced.vue'
 import indices from '../views/Indices/indices.vue'
 import calculator from '../views/Calculator/calculator.vue'
 import charts from '../views/Charts/charts.vue'
@@ -13,6 +16,9 @@ Vue.use(Router)
 
 export const constantRouterMap = [
     { path: '/trilhas', name: 'trails', component: trails },
+    { path: '/trilhas/iniciante', name: 'novice', component: novice },
+    { path: '/trilhas/intermediario', name: 'intermediate', component: intermediate },
+    { path: '/trilhas/avancado', name: 'advanced', component: advanced },
     { path: '', name: 'trails', component: trails },
     { path: '/indices', name: 'indices', component: indices },
     { path: '/calculadora', name: 'calculator', component: calculator },

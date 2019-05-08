@@ -5,5 +5,5 @@
 </template>
 
 <style lang="scss">
-@import '~styles/default-theme';
+@import '~styles/generic/reset';
 </style>
