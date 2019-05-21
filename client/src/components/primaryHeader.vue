@@ -6,14 +6,14 @@
         <div class="nav-wrapper">
             <router-link tag="div" :to="{ name: 'trails' }" class="nav-item"
                 :class="{'--selected': tab == 'trails'}">Trilhas</router-link>
-            <router-link tag="div" :to="{ name: 'charts' }" class="nav-item"
-                :class="{'--selected': tab == 'charts'}">Gráficos</router-link>
+            <!-- <router-link tag="div" :to="{ name: 'charts' }" class="nav-item"
+                :class="{'--selected': tab == 'charts'}">Gráficos</router-link> -->
             <router-link tag="div" :to="{ name: 'indices' }" class="nav-item"
                 :class="{'--selected': tab == 'indices'}">Índices</router-link>
             <router-link tag="div" :to="{ name: 'calculator' }" class="nav-item"
                 :class="{'--selected': tab == 'calculator'}">Calculadora</router-link>
-            <router-link tag="div" :to="{ name: 'news' }" class="nav-item"
-                :class="{'--selected': tab == 'news'}">Notícias</router-link>
+            <!-- <router-link tag="div" :to="{ name: 'news' }" class="nav-item"
+                :class="{'--selected': tab == 'news'}">Notícias</router-link> -->
             <router-link tag="div" :to="{ name: 'profile' }" class="nav-item"
                 :class="{'--selected': tab == 'profile'}">Perfil</router-link>
         </div>

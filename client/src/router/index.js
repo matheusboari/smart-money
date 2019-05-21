@@ -12,11 +12,14 @@ import charts from '../views/Charts/charts.vue'
 import news from '../views/News/news.vue'
 import profile from '../views/Profile/profile.vue'
 
+import intro from '../views/Trails/components/introduction.vue'
+
 Vue.use(Router)
 
 export const constantRouterMap = [
     { path: '/trilhas', name: 'trails', component: trails },
     { path: '/trilhas/iniciante', name: 'novice', component: novice },
+    { path: '/trilhas/iniciante/introducao', name: 'intro', component: intro },
     { path: '/trilhas/intermediario', name: 'intermediate', component: intermediate },
     { path: '/trilhas/avancado', name: 'advanced', component: advanced },
     { path: '', name: 'trails', component: trails },

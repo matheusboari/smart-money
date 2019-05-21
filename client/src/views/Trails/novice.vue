@@ -10,8 +10,8 @@
 
             <div class="trails">
                 <div class="cdi trail">
-                    <h2 class="title">Trilha de CDI</h2>
-                    <span class="description">Descrição da trilha sobre CDI</span>
+                    <h2 class="title">Trilha de Introdução</h2>
+                    <span class="description">Descrição da trilha sobre Introdução</span>
                 </div>
 
                 <div class="selic trail">
