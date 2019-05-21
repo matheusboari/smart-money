@@ -2,11 +2,12 @@
     <div class="form login">
         <h3 class="title">Bem vindo ao</h3>
         <img src="../../../assets/logo.png" class="logo" alt="">
+        <h3 class="smart-money">Smart Money</h3>
         <span class="info">Faça login e tenha acesso ilimitado aos recursos que a Smart Money disponibiliza.</span>
-        <b-input class="input" v-model="username" placeholder="Login" />
-        <b-input type="password" class="input" v-model="password" placeholder="Senha" />
+        <el-input class="input" v-model="username" placeholder="Login" />
+        <el-input type="password" class="input" v-model="password" placeholder="Senha" />
 
-        <b-button class="btn" @click="login()" variant="primary">Login</b-button>
+        <el-button type="primary" class="btn" @click="login()" variant="primary">Login</el-button>
         <slot name="register-btn"></slot>
     </div>
 </template>
@@ -58,6 +59,7 @@ export default {
     width: 500px;
     height: 500px;
     box-shadow: 0px 1px 10px -1px rgba(0,0,0,0.4);
+    background: white;
     >.title {
         font-size: 1.3em;
         font-style: italic;

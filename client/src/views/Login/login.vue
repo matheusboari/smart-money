@@ -44,9 +44,20 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url('../../assets/background-login.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    &::before {
+        content: ' ';
+        width: 100%;
+        height: 100%;
+        background: #27333c85;
+        position: absolute;
+    }
 }
 .cards-wrap {
     display: flex;
+    z-index: 5;
     >.background-wrap {
         width: 500px;
         height: 500px;
