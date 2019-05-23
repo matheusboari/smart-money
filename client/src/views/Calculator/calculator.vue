@@ -31,6 +31,12 @@
                                 <template slot="append">% ao ano</template>
                             </el-input>
                         </div>
+                        <div class="input ipca-tax">
+                            <strong class="title">Taxa IPCA</strong>
+                            <el-input placeholder="6,4" v-model="taxIpca">
+                                <template slot="append">% ao ano</template>
+                            </el-input>
+                        </div>
                         <div class="input cdb-lc">
                             <strong class="title">CDB/LC</strong>
                             <el-input placeholder="83" v-model="cdb">
@@ -63,7 +69,7 @@
                             <strong class="title">CDB</strong>
                             <span class="stat">Valor Total: R$ 5.31</span>
                             <div class="imposto">
-                                <el-badge :value="20 + '%'" class="item"><span class="stat">Imposto de Renda: R$ 1.06</span></el-badge>
+                                <el-badge :value="taxes + '%'" class="item"><span class="stat">Imposto de Renda: R$ 1.06</span></el-badge>
                             </div>
                             <span class="stat">Valor Líquido: R$ 4.25</span>
                             <el-progress :text-inside="false" :stroke-width="18" :percentage="4.3" color="rgba(142, 113, 199, 0.7)"></el-progress>
@@ -77,7 +83,7 @@
                             <strong class="title">Tesouro SELIC</strong>
                             <span class="stat">Valor Total: R$ 6.40</span>
                             <div class="imposto">
-                                <el-badge :value="20 + '%'" class="item"><span class="stat">Imposto de Renda: R$ 1.28</span></el-badge>
+                                <el-badge :value="taxes + '%'" class="item"><span class="stat">Imposto de Renda: R$ 1.28</span></el-badge>
                             </div>
                             <span class="stat">Taxa Bovespa: R$ 0.30</span>
                             <span class="stat">Valor Líquido: R$ 4.82</span>
@@ -104,7 +110,9 @@ export default {
             taxDi: 6.4,
             taxSelic: 6.4,
             cdb: 83,
-            licLca: 91
+            licLca: 91,
+            taxIpca: 6.4,
+            taxes: 20
         }
     },
     methods: {
@@ -113,6 +121,13 @@ export default {
     watch: {
         value () {
             
+        },
+        months () {
+            if(this.months <= 6) this.taxes = 22.5 
+            else if (this.months > 6 && this.months <= 12) this.taxes = 20
+            else if (this.months > 12 && this.months <= 24) this.taxes = 17.5
+            else if (this.months > 24) this.taxes = 15
+            else this.taxes = 20
         }
     }
 }
