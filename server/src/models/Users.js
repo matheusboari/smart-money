@@ -5,7 +5,6 @@ export default mongoose.model('users',
   new Schema({
     name: String,
     login: String,
-    birthdayDate: Number,
     password: String,
     email: String,
     wallet: [{

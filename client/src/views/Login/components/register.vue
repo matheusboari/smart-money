@@ -2,13 +2,13 @@
     <div class="form register">
         <img src="../../../assets/logo.png" class="logo" alt="">
 
-        <b-input class="input" v-model="query.name" placeholder="Name" />
-        <b-input class="input" v-model="query.username" placeholder="Username" />
-        <b-input class="input" v-model="query.email" placeholder="E-mail" />
-        <b-input class="input" v-model="query.password" placeholder="Password" />
-        <b-input class="input" v-model="confirmPass" placeholder="Confirm password" />
+        <el-input class="input" v-model="query.name" placeholder="Name" />
+        <el-input class="input" v-model="query.username" placeholder="Username" />
+        <el-input class="input" v-model="query.email" placeholder="E-mail" />
+        <el-input class="input" v-model="query.password" placeholder="Password" type="password" />
+        <el-input class="input" v-model="confirmPass" placeholder="Confirm password" type="password" />
         
-        <b-button class="btn" @click="register()" variant="primary">Register</b-button>
+        <el-button type="primary" class="btn" @click="register()" variant="primary">Register</el-button>
 
         <slot name="login-btn"></slot>
     </div>
@@ -82,6 +82,7 @@ export default {
     width: 500px;
     height: 500px;
     box-shadow: 0px 1px 10px -1px rgba(0,0,0,0.4);
+    background: white;
     >.logo {
         width: 75px;
         margin: 10px 0;

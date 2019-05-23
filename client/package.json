@@ -17,7 +17,9 @@
     "element-ui": "^2.4.8",
     "url-loader": "^1.1.2",
     "vue": "^2.5.11",
-    "vue-router": "^3.0.2"
+    "vue-echarts": "^4.0.3",
+    "vue-router": "^3.0.2",
+    "vue-sweetalert2": "^2.0.5"
   },
   "browserslist": [
     "> 1%",
