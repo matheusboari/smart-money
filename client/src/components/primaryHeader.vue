@@ -14,8 +14,8 @@
                 :class="{'--selected': tab == 'calculator'}">Calculadora</router-link>
             <!-- <router-link tag="div" :to="{ name: 'news' }" class="nav-item"
                 :class="{'--selected': tab == 'news'}">Notícias</router-link> -->
-            <router-link tag="div" :to="{ name: 'profile' }" class="nav-item"
-                :class="{'--selected': tab == 'profile'}">Perfil</router-link>
+            <router-link tag="div" :to="{ name: 'wallet' }" class="nav-item"
+                :class="{'--selected': tab == 'wallet'}">Carteira</router-link>
         </div>
     </div>
 </template>

@@ -10,7 +10,7 @@ import indices from '../views/Indices/indices.vue'
 import calculator from '../views/Calculator/calculator.vue'
 import charts from '../views/Charts/charts.vue'
 import news from '../views/News/news.vue'
-import profile from '../views/Profile/profile.vue'
+import wallet from '../views/Wallet/wallet.vue'
 
 import intro from '../views/Trails/components/introduction.vue'
 
@@ -27,7 +27,7 @@ export const constantRouterMap = [
     { path: '/calculadora', name: 'calculator', component: calculator },
     { path: '/graficos', name: 'charts', component: charts },
     { path: '/noticias', name: 'news', component: news },
-    { path: '/perfil', name: 'profile', component: profile },
+    { path: '/carteira', name: 'wallet', component: wallet },
     { path: '/login', name: 'login', component: login },
 ]
 

@@ -21,7 +21,8 @@ export default mongoose.model('users',
         indicator: Number
       },
       startDate: Number,
-      endDate: Number
+      endDate: Number,
+      stop: Boolean
     }]
   }),
 'users')

@@ -1,6 +1,6 @@
 <template>
     <div class="profile-wrapper">
-        <primary-header tab="profile" />
+        <primary-header tab="wallet" />
     </div>
 </template>
 
