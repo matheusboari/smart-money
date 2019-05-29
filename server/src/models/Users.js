@@ -4,11 +4,15 @@ const Schema = mongoose.Schema
 export default mongoose.model('users',
   new Schema({
     name: String,
+    profilePhoto: String,
     login: String,
     password: String,
     email: String,
     wallet: [{
-      value: Number,
+      amount: {
+        value: Number,
+        date: Number
+      },
       paper: {
         name: String,
         discount: [{
