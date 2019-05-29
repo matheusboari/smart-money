@@ -1,5 +1,5 @@
 <template>
-    <div class="form login">
+    <div class="form login" v-loading="loading">
         <h3 class="title">Bem vindo ao</h3>
         <img src="../../../assets/logo.png" class="logo" alt="">
         <h3 class="smart-money">Smart Money</h3>
@@ -7,7 +7,7 @@
         <el-input class="input" v-model="username" placeholder="Login" />
         <el-input type="password" class="input" v-model="password" placeholder="Senha" />
 
-        <el-button type="primary" class="btn" @click="login()" variant="primary">Login</el-button>
+        <el-button type="primary" class="btn" @click="Login()" variant="primary">Login</el-button>
         <slot name="register-btn"></slot>
     </div>
 </template>
@@ -17,33 +17,29 @@ export default {
     data () {
         return {
             username: '',
-            password: ''
+            password: '',
+            loading: false
         }
     },
     methods: {
-        login () {
-            const self = this
-
-            if(verifyFields()) {
-                this.$node.post('users/login', {
-                    login: this.username,
-                    password: this.password
-                })
-                .then(({data}) => {
-                    console.log(data)
-                })
+        Login () {
+            this.loading = true
+            const params = { login: this.username, password: this.password }
+            if(this.VerifyFields()) {
+                this.$node.post('users/login', params)
+                .then(({data}) => { console.log(data) })
                 .catch(err => console.log(err))
+                .finally(() => this.loading = false)
             }
-
-            function verifyFields () {
-                if(self.username == '') {
-                    console.log('Username deve ser preenchido')
-                    return false
-                } else if(self.password == '') {
-                    console.log('Senha deve ser preenchida')
-                    return false
-                } else return true
-            }
+        },
+        VerifyFields () {
+            if(this.username == '') {
+                this.$swal('Oops...', 'Preencha o login corretamente.', 'error')
+                return false
+            } else if(this.password == '') {
+                this.$swal('Oops...', 'Preencha a senha corretamente.', 'error')
+                return false
+            } else return true
         }
     }
 }
