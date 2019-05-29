@@ -2,42 +2,47 @@
     <div class="wallets-header-wrapper">
         <primary-header tab="wallet" />
         <div class="wallets-wrapper">
-           <div class="wallets">
-               <div class="add-wallet">
+           <div class="wallets-header">
+               <div class="add-wallet" @click="wallets.push({name: 'Nova Carteira'})">
                    <i class="el-icon-wallet icon"></i>
                    <h3 class="title">Adicionar Carteira</h3>
                </div>
-               <div class="new-wallet">
+               <div class="new-wallet" v-for="(wallet, i) in wallets" :key="i">
                    <i class="el-icon-wallet icon"></i>
-                   <h3 class="title">New Wallet</h3>
+                   <h3 class="title">{{wallet.name}}</h3>
                </div>
-               <div class="new-wallet">
-                   <i class="el-icon-wallet icon"></i>
-                   <h3 class="title">New Wallet</h3>
+           </div>
+           <div class="body-wrapper">
+               <div class="profile-side">
+                   <div class="name">{{user.name}}</div>
+                   <div class="email">{{user.email}}</div>
+
+                   <div class="logout-btn" @click="Logout">SAIR</div>
+
+                   <div class="delete-account">EXCLUIR CONTA</div>
                </div>
-               <div class="new-wallet">
-                   <i class="el-icon-wallet icon"></i>
-                   <h3 class="title">New Wallet</h3>
-               </div>
-               <div class="new-wallet">
-                   <i class="el-icon-wallet icon"></i>
-                   <h3 class="title">New Wallet</h3>
-               </div>
-               <div class="new-wallet">
-                   <i class="el-icon-wallet icon"></i>
-                   <h3 class="title">New Wallet</h3>
-               </div>
-               <div class="new-wallet">
-                   <i class="el-icon-wallet icon"></i>
-                   <h3 class="title">New Wallet</h3>
-               </div>
-               <div class="new-wallet">
-                   <i class="el-icon-wallet icon"></i>
-                   <h3 class="title">New Wallet</h3>
-               </div>
-               <div class="new-wallet">
-                   <i class="el-icon-wallet icon"></i>
-                   <h3 class="title">New Wallet</h3>
+               <div class="wallet-side">
+                   <div class="header-infos">
+                       <div class="stats">
+                            <div class="amount">
+                                <div class="title">SALDO BRUTO</div>
+                                <div class="value">R$ 5.076,73</div>
+                            </div>
+                            <div class="profit">
+                                <div class="title">RENTABILIDADE TOTAL</div>
+                                <div class="value">1,62%</div>
+                            </div>
+                            <div class="applicated-value">
+                                <div class="title">VALOR APLICADO</div>
+                                <div class="value">R$ 4.995,80</div>
+                            </div>
+                            <div class="first-date">
+                                <div class="title">PRIMEIRA APLICAÇÃO</div>
+                                <div class="date">22MAR2019</div>
+                            </div>
+                       </div>
+                       <div class="update">ATUALIZADO: 28MAI2019</div>
+                   </div>
                </div>
            </div>
         </div>
@@ -50,6 +55,25 @@ import primaryHeader from '../../components/primaryHeader.vue'
 export default {
     components: {
         primaryHeader
+    },
+    data () {
+        return {
+            user: localStorage.getItem('user'),
+            wallets: []
+        }
+    },
+    methods: {
+        AddWallet () {
+
+        },
+        Logout () {
+            localStorage.clear()
+            location.reload()
+        }
+    },
+    mounted () {
+        this.user = JSON.parse(this.user)
+        this.wallets = this.user.wallet
     },
     beforeRouteEnter (to, from, next) {
         const user = JSON.parse(localStorage.getItem('user'))
@@ -66,7 +90,7 @@ export default {
     width: 100%;
     height: 100%;
     color: $defaultFont;
-    >.wallets {
+    >.wallets-header {
         display: flex;
         padding: 20px 50px;
         background-color: $gray-300;
@@ -104,6 +128,74 @@ export default {
             flex-grow: 1;
             >.icon {
                 font-size: 1.5em;
+            }
+        }
+    }
+    >.body-wrapper {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        max-width: 1050px;
+        margin: auto;
+        margin-top: 50px;
+        >.profile-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 1px solid rgba(51, 51, 51, .2);
+            >.name, .email {
+                padding: 10px 0;
+                width: 50%;
+                border-bottom: 1px solid rgba(51, 51, 51, .2);
+            }
+            >.logout-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 50px;
+                padding: 15px 60px;
+                background-color: #D6D6D6;
+                border-radius: 50px;
+                cursor: pointer;
+            }
+            >.delete-account {
+                margin-top: 50px;
+                color: #F98017;
+                cursor: pointer;
+            }
+        }
+        >.wallet-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px;
+            >.header-infos {
+                width: 100%;
+                padding: 20px;
+                background-color: $gray-300;
+                >.stats {
+                    display: grid;
+                    grid-template-columns: 50% 50%;
+                    margin-bottom: 10px;
+                    >.amount, .profit, .first-date, .applicated-value {
+                        >.title {
+                            font-size: .9em;
+                            color: #707070;
+                        }
+                        >.value, .date {
+                            font-size: 1.1em;
+                            font-weight: bold;
+                        }
+                    }
+                    >.amount, .profit { margin-bottom: 10px; }
+                    >.first-date, .profit {
+                        text-align: end;
+                        >.value, .date { color: #32AF60; }
+                    }
+                }
+                >.update {
+                    text-align: center;
+                    font-size: .9em;
+                }
             }
         }
     }
