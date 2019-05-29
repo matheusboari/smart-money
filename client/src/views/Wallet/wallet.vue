@@ -28,7 +28,7 @@
                        <div class="stats">
                             <div class="amount">
                                 <div class="title">SALDO BRUTO</div>
-                                <div class="value">R$ 5.076,73</div>
+                                <div class="value">R$ {{walletSelect.amount[walletSelect.amount.length - 1].value}}</div>
                             </div>
                             <div class="profit">
                                 <div class="title">RENTABILIDADE TOTAL</div>
@@ -36,11 +36,11 @@
                             </div>
                             <div class="applicated-value">
                                 <div class="title">VALOR APLICADO</div>
-                                <div class="value">R$ 4.995,80</div>
+                                <div class="value">R$ {{walletSelect.amount[0].value}}</div>
                             </div>
                             <div class="first-date">
                                 <div class="title">PRIMEIRA APLICAÇÃO</div>
-                                <div class="date">22MAR2019</div>
+                                <div class="date">{{walletSelect.startDate}}</div>
                             </div>
                        </div>
                        <div class="update">ATUALIZADO: 28MAI2019</div>
@@ -67,7 +67,7 @@ export default {
         return {
             user: localStorage.getItem('user'),
             wallets: [],
-            walletSelect: true,
+            walletSelect: null,
             addWallet: false
         }
     },

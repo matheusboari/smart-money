@@ -1,6 +1,6 @@
 <template>
     <div class="body-wrapper">
-        <div class="add-wallet">
+        <div class="add-wallet" v-loading="loading">
             <i class="el-icon-error icon" @click="CloseAddWallet"></i>
             <h1 class="title">Nova Carteira</h1>
             <div class="form-wrapper">
@@ -66,10 +66,7 @@ export default {
             const params = { login: this.user.login, name: this.name, type: this.type, value: this.value, date: this.date }
 
             this.$node.post('users/wallet/create', params)
-            .then(({ data }) => {
-                console.log(data)
-                // this.$eventBus.$emit('CloseAddWallet')
-            })
+            .then(({ data }) => { this.$eventBus.$emit('WalletAdded') })
             .catch(err => console.log(err))
             .finally(() => this.loading = false)
         }
