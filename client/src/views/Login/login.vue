@@ -33,6 +33,11 @@ export default {
         return {
             register: false,
         }
+    },
+    beforeRouteEnter (to, from, next) {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if(user !== null) next({ name: 'wallet' })
+        else next(true)
     }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="form register">
+    <div class="form register" v-loading="loading">
         <img src="../../../assets/logo.png" class="logo" alt="">
 
         <el-input class="input" v-model="query.name" placeholder="Name" />
@@ -25,48 +25,52 @@ export default {
                 password: '',
                 date: ''
             },
-            confirmPass: ''
+            confirmPass: '',
+            loading: false
         }
     },
     methods: {
         register () {
-            const self = this
-
-            if(verifyFields()) {
-                this.$node.post('users/register', {
-                    nome: this.query.name,
-                    login: this.query.username,
-                    senha: this.query.password,
-                    email: this.query.email,
-                    data_nascimento: this.query.date
-                })
+            this.loading = true
+            const params = { name: this.query.name, login: this.query.username, password: this.query.password, email: this.query.email }
+            if(this.VerifyFields()) {
+                this.$node.post('users/register', params)
                 .then(({data}) => {
-                    console.log(data)
+                    if(data.status) this.Login(params.login, params.password)
+                    else return this.$swal('Oops...', data.details, 'error')
                 })
                 .catch(err => console.log(err))
+                .finally(() => this.loading = false)
             }
-
-            function verifyFields () {
-                if(self.query.name == '') {
-                    console.log('Nome deve ser preenchido')
-                    return false
-                } else if(self.query.username == '') {
-                    console.log('Username deve ser preenchido')
-                    return false
-                } else if(self.query.email == '') {
-                    console.log('Email deve ser preenchido')
-                    return false
-                } else if(self.query.date == '') {
-                    console.log('Data de nascimento deve ser preenchida')
-                    return false
-                } else if(self.query.password == '') {
-                    console.log('Senha deve ser preenchido')
-                    return false
-                } else if(self.query.password !== self.confirmPass) {
-                    console.log('Senhas não são iguais')
-                    return false
-                } else return true
-            }
+        },
+        VerifyFields () {
+            if(this.query.name == '') {
+                this.$swal('Oops...', 'Preencha o nome corretamente.', 'error')
+                return false
+            } else if(this.query.username == '') {
+                this.$swal('Oops...', 'Preencha o username corretamente.', 'error')
+                return false
+            } else if(this.query.email == '') {
+                this.$swal('Oops...', 'Preencha o e-mail corretamente.', 'error')
+                return false
+            } else if(this.query.password == '') {
+                this.$swal('Oops...', 'Preencha a senha corretamente.', 'error')
+                return false
+            } else if(this.query.password !== this.confirmPass) {
+                this.$swal('Oops...', 'As senhas não são iguais.', 'error')
+                return false
+            } else return true
+        },
+        Login (login, password) {
+            this.loading = true
+            const params = { login, password }
+            this.$node.post('users/login', params)
+            .then(({data}) => {
+                localStorage.setItem('user', JSON.stringify(data.user))
+                location.reload()
+            })
+            .catch(err => console.log(err))
+            .finally(() => this.loading = false)
         }
     }
 }

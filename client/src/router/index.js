@@ -22,7 +22,7 @@ export const constantRouterMap = [
     { path: '/trilhas/iniciante/introducao', name: 'intro', component: intro },
     { path: '/trilhas/intermediario', name: 'intermediate', component: intermediate },
     { path: '/trilhas/avancado', name: 'advanced', component: advanced },
-    { path: '', name: 'trails', component: trails },
+    { path: '', name: 'trailsDefault', component: trails },
     { path: '/indices', name: 'indices', component: indices },
     { path: '/calculadora', name: 'calculator', component: calculator },
     { path: '/graficos', name: 'charts', component: charts },

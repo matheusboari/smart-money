@@ -9,6 +9,10 @@ class UsersRepository {
     return this.model.find(query)
   }
 
+  getOne (query) {
+    return this.model.findOne(query)
+  }
+
   update (_id, data, callback) {
     return this.model.updateOne({_id: _id}, data, callback)
   }

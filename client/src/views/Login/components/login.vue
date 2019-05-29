@@ -27,7 +27,12 @@ export default {
             const params = { login: this.username, password: this.password }
             if(this.VerifyFields()) {
                 this.$node.post('users/login', params)
-                .then(({data}) => { console.log(data) })
+                .then(({data}) => {
+                    if(data.status) {
+                        localStorage.setItem('user', JSON.stringify(data.user))
+                        location.reload()
+                    } else return this.$swal('Oops...', data.details, 'error')
+                })
                 .catch(err => console.log(err))
                 .finally(() => this.loading = false)
             }
