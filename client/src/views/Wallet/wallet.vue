@@ -50,6 +50,11 @@ import primaryHeader from '../../components/primaryHeader.vue'
 export default {
     components: {
         primaryHeader
+    },
+    beforeRouteEnter (to, from, next) {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if(user !== null) next(true)
+        else next({ name: 'login' })
     }
 }
 </script>
