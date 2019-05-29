@@ -12,6 +12,8 @@ Vue.use(NodePlugin)
 Vue.use(VueSweetalert2)
 Vue.use(ElementUI, { locale })
 
+Vue.prototype.$eventBus = new Vue()
+
 new Vue({
   el: '#app',
   router,
