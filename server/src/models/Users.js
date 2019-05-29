@@ -9,10 +9,11 @@ export default mongoose.model('users',
     password: String,
     email: String,
     wallet: [{
-      amount: {
+      name: String,
+      amount: [{
         value: Number,
         date: Number
-      },
+      }],
       paper: {
         name: String,
         discount: [{
@@ -22,7 +23,11 @@ export default mongoose.model('users',
       },
       indexer: {
         name: String,
-        indicator: Number
+        indicator: Number,
+        percentage: [{
+          value: Number,
+          date: Number
+        }]
       },
       startDate: Number,
       endDate: Number,
