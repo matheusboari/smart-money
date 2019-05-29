@@ -13,16 +13,8 @@ export default mongoose.model('users',
         value: Number,
         date: Number
       }],
-      paper: {
-        name: String,
-        discount: [{
-          type: String,
-          value: Number
-        }]
-      },
       indexer: {
         name: String,
-        indicator: Number,
         percentage: [{
           value: Number,
           date: Number

@@ -1,9 +1,10 @@
 <template>
     <div class="wallets-header-wrapper">
         <primary-header tab="wallet" />
+        <add-wallet v-if="addWallet" />
         <div class="wallets-wrapper">
            <div class="wallets-header">
-               <div class="add-wallet" @click="wallets.push({name: 'Nova Carteira'})">
+               <div class="add-wallet" @click="addWallet = true">
                    <i class="el-icon-wallet icon"></i>
                    <h3 class="title">Adicionar Carteira</h3>
                </div>
@@ -21,7 +22,7 @@
 
                    <div class="delete-account">EXCLUIR CONTA</div>
                </div>
-               <div class="wallet-side">
+               <div class="wallet-side" v-if="wallet">
                    <div class="header-infos">
                        <div class="stats">
                             <div class="amount">
@@ -44,6 +45,9 @@
                        <div class="update">ATUALIZADO: 28MAI2019</div>
                    </div>
                </div>
+               <div class="wallet-side-else" v-else>
+                   Sem carteira selecionada
+               </div>
            </div>
         </div>
     </div>
@@ -51,21 +55,22 @@
 
 <script>
 import primaryHeader from '../../components/primaryHeader.vue'
+import addWallet from '../../components/addWallet.vue'
 
 export default {
     components: {
-        primaryHeader
+        primaryHeader,
+        addWallet
     },
     data () {
         return {
             user: localStorage.getItem('user'),
-            wallets: []
+            wallets: [],
+            wallet: true,
+            addWallet: false
         }
     },
     methods: {
-        AddWallet () {
-
-        },
         Logout () {
             localStorage.clear()
             location.reload()
@@ -88,12 +93,12 @@ export default {
 
 .wallets-wrapper {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     color: $defaultFont;
     >.wallets-header {
         display: flex;
         padding: 20px 50px;
-        background-color: $gray-300;
+        background-color: #D6D6D6;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -171,7 +176,7 @@ export default {
             >.header-infos {
                 width: 100%;
                 padding: 20px;
-                background-color: $gray-300;
+                background-color: #D6D6D6;
                 >.stats {
                     display: grid;
                     grid-template-columns: 50% 50%;
@@ -198,6 +203,7 @@ export default {
                 }
             }
         }
+        >.wallet-side-else { text-align: center; }
     }
 }
 </style>
