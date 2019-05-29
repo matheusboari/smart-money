@@ -1,5 +1,5 @@
 <template>
-    <div class="wallets-header-wrapper">
+    <div class="wallets-header-wrapper" v-loading="loading">
         <primary-header tab="wallet" />
         <add-wallet v-if="addWallet" />
         <div class="wallets-wrapper">
@@ -21,7 +21,7 @@
 
                    <div class="logout-btn" @click="Logout">SAIR</div>
 
-                   <div class="delete-account">EXCLUIR CONTA</div>
+                   <div class="delete-account" @click="DeleteAccount">EXCLUIR CONTA</div>
                </div>
                <div class="wallet-side" v-if="walletSelect">
                    <div class="header-infos">
@@ -68,13 +68,26 @@ export default {
             user: localStorage.getItem('user'),
             wallets: [],
             walletSelect: null,
-            addWallet: false
+            addWallet: false,
+            loading: false
         }
     },
     methods: {
         Logout () {
             localStorage.clear()
             location.reload()
+        },
+        DeleteAccount () {
+            this.loading = true
+            this.$node.delete(`/users/delete/${this.user._id}`)
+            .then(({data}) => {
+                if(data.n == 1) {
+                    localStorage.clear()
+                    location.reload()
+                } else this.$swal('Oops...', 'Ocorreu um erro interno.', 'error')
+            })
+            .catch(err => console.log(err))
+            .finally(() => this.loading = false)
         }
     },
     mounted () {
@@ -82,6 +95,11 @@ export default {
         this.wallets = this.user.wallet
 
         this.$eventBus.$on('CloseAddWallet', () => { this.addWallet = false })
+        this.$eventBus.$on('WalletAdded', data => {
+            this.addWallet = false
+            this.wallets = data.wallet
+            localStorage.setItem('user', JSON.stringify(data))
+        })
     },
     beforeRouteEnter (to, from, next) {
         const user = JSON.parse(localStorage.getItem('user'))

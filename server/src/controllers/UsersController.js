@@ -8,6 +8,8 @@ class UsersController {
   async update (req, res) { res.json({ 'status': 'off' }) }
 
   async createWallet (req, res) { res.json(await UsersService.createWallet(req.body)) }
+  
+  async deleteAccount (req, res) { res.json(await UsersService.deleteAccount(req.params.id)) }
 }
 
 export default new UsersController()

@@ -8,7 +8,7 @@
                     <el-input class="name-input" placeholder="Nome da carteira" v-model="name" />
                 </div>
                 <div class="type">
-                    <el-select v-model="type" class="type-input" placeholder="Select">
+                    <el-select v-model="type" class="type-input" placeholder="Tipo de Investimento">
                         <el-option
                             label="SELIC"
                             value="selic">
@@ -33,9 +33,9 @@
                     <el-date-picker
                         class="date-picker"
                         v-model="date"
-                        type="month"
+                        type="date"
                         placeholder="Selecione o início"
-                        format="MM/yyyy"
+                        format="dd/MM/yyyy"
                         value-format="timestamp">
                     </el-date-picker>
                 </div>
@@ -53,7 +53,8 @@ export default {
             type: null,
             value: null,
             date: null,
-            user: localStorage.getItem('user')
+            user: localStorage.getItem('user'),
+            loading: false
         }
     },
     methods: {
@@ -66,7 +67,7 @@ export default {
             const params = { login: this.user.login, name: this.name, type: this.type, value: this.value, date: this.date }
 
             this.$node.post('users/wallet/create', params)
-            .then(({ data }) => { this.$eventBus.$emit('WalletAdded') })
+            .then(({ data }) => { this.$eventBus.$emit('WalletAdded', data) })
             .catch(err => console.log(err))
             .finally(() => this.loading = false)
         }

@@ -29,7 +29,12 @@ class UsersService {
           }, (err, data) => {
             if (err) console.log(err)
         })
-        console.log(user)
+        
+        return user
+    }
+
+    async deleteAccount (id) {
+        return UsersRepository.delete(id, (err, data) => { if(err) console.log(err) })
     }
 
     async register(query) {

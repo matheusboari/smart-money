@@ -23,6 +23,10 @@ class UsersRepository {
       callback(err, result)
     })
   }
+
+  delete (_id, callback) {
+    return this.model.deleteOne({_id}, callback)
+  }
 }
 
 export default new UsersRepository()
