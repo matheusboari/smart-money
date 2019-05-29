@@ -6,6 +6,8 @@ class UsersController {
   async login (req, res) { res.json(await UsersService.login(req.body)) }
 
   async update (req, res) { res.json({ 'status': 'off' }) }
+
+  async createWallet (req, res) { res.json(await UsersService.createWallet(req.body)) }
 }
 
 export default new UsersController()

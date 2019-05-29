@@ -1,9 +1,12 @@
 <template>
     <div class="body-wrapper">
         <div class="add-wallet">
-            <i class="el-icon-error icon"></i>
+            <i class="el-icon-error icon" @click="CloseAddWallet"></i>
             <h1 class="title">Nova Carteira</h1>
             <div class="form-wrapper">
+                <div class="name">
+                    <el-input class="name-input" placeholder="Nome da carteira" v-model="name" />
+                </div>
                 <div class="type">
                     <el-select v-model="type" class="type-input" placeholder="Select">
                         <el-option
@@ -30,14 +33,14 @@
                     <el-date-picker
                         class="date-picker"
                         v-model="date"
-                        type="date"
+                        type="month"
                         placeholder="Selecione o início"
-                        format="dd/MM/yyyy"
+                        format="MM/yyyy"
                         value-format="timestamp">
                     </el-date-picker>
                 </div>
             </div>
-            <div class="add-btn">Adicionar</div>
+            <div class="add-btn" @click="AddWallet">Adicionar</div>
         </div>
     </div>
 </template>
@@ -46,10 +49,33 @@
 export default {
     data () {
         return {
+            name: null,
             type: null,
             value: null,
-            date: null
+            date: null,
+            user: localStorage.getItem('user')
         }
+    },
+    methods: {
+        CloseAddWallet () { this.$eventBus.$emit('CloseAddWallet') },
+        AddWallet () {
+            if(!this.name || !this.type || !this.value || !this.date)
+                return this.$swal('Oops...', 'Preencha todos os campos corretamente.', 'error')
+
+            this.loading = true
+            const params = { login: this.user.login, name: this.name, type: this.type, value: this.value, date: this.date }
+
+            this.$node.post('users/wallet/create', params)
+            .then(({ data }) => {
+                console.log(data)
+                // this.$eventBus.$emit('CloseAddWallet')
+            })
+            .catch(err => console.log(err))
+            .finally(() => this.loading = false)
+        }
+    },
+    mounted () {
+        this.user = JSON.parse(this.user)
     }
 }
 </script>
@@ -85,7 +111,7 @@ export default {
         >.form-wrapper {
             display: flex;
             flex-direction: column;
-            >.type, .value, .date {
+            >.type, .value, .date, .name {
                 display: flex;
                 width: 100%;
                 margin-bottom: 10px;

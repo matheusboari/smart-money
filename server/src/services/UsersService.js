@@ -5,6 +5,33 @@ class UsersService {
         this.moment = global.moment
     }
 
+    async createWallet (query) {
+        const user = await UsersRepository.getOne({ login: query.login })
+        const newWallet = {
+            name: query.name,
+            amount: [{
+                value: query.value,
+                date: query.date
+            }],
+            indexer: {
+                name: query.type,
+                percentage: []
+            },
+            startDate: query.date,
+            endDate: null,
+            stop: false
+        }
+        user.wallet.push(newWallet)
+        UsersRepository.update(user._id, {
+            $set: {
+                wallet: user.wallet
+            }
+          }, (err, data) => {
+            if (err) console.log(err)
+        })
+        console.log(user)
+    }
+
     async register(query) {
         let verifyLogin = await verifyValues({login: query.login}, 'Login')
         let verifyEmail = await verifyValues({email: query.email}, 'Email')

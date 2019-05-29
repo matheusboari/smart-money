@@ -8,7 +8,8 @@
                    <i class="el-icon-wallet icon"></i>
                    <h3 class="title">Adicionar Carteira</h3>
                </div>
-               <div class="new-wallet" v-for="(wallet, i) in wallets" :key="i">
+               <div class="new-wallet" v-for="(wallet, i) in wallets" :key="i" 
+                    @click="walletSelect = wallet">
                    <i class="el-icon-wallet icon"></i>
                    <h3 class="title">{{wallet.name}}</h3>
                </div>
@@ -22,7 +23,7 @@
 
                    <div class="delete-account">EXCLUIR CONTA</div>
                </div>
-               <div class="wallet-side" v-if="wallet">
+               <div class="wallet-side" v-if="walletSelect">
                    <div class="header-infos">
                        <div class="stats">
                             <div class="amount">
@@ -66,7 +67,7 @@ export default {
         return {
             user: localStorage.getItem('user'),
             wallets: [],
-            wallet: true,
+            walletSelect: true,
             addWallet: false
         }
     },
@@ -79,6 +80,8 @@ export default {
     mounted () {
         this.user = JSON.parse(this.user)
         this.wallets = this.user.wallet
+
+        this.$eventBus.$on('CloseAddWallet', () => { this.addWallet = false })
     },
     beforeRouteEnter (to, from, next) {
         const user = JSON.parse(localStorage.getItem('user'))
