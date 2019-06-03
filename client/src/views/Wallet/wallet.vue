@@ -32,7 +32,7 @@
                             </div>
                             <div class="profit">
                                 <div class="title">RENTABILIDADE TOTAL</div>
-                                <div class="value">1,62%</div>
+                                <div class="value">{{walletSelect.percentage}}%</div>
                             </div>
                             <div class="applicated-value">
                                 <div class="title">VALOR APLICADO</div>
@@ -40,10 +40,10 @@
                             </div>
                             <div class="first-date">
                                 <div class="title">PRIMEIRA APLICAÇÃO</div>
-                                <div class="date">{{walletSelect.startDate}}</div>
+                                <div class="date">{{walletSelect.startDate | moment('DDMMMYYYY')}}</div>
                             </div>
                        </div>
-                       <div class="update">ATUALIZADO: 28MAI2019</div>
+                       <div class="update">ATUALIZADO: {{walletSelect.amount[walletSelect.amount.length - 1].date | moment('DDMMMYYYY')}}</div>
                    </div>
                </div>
                <div class="wallet-side-else" v-else>
@@ -100,6 +100,12 @@ export default {
             this.wallets = data.wallet
             localStorage.setItem('user', JSON.stringify(data))
         })
+    },
+    watch: {
+        walletSelect () {
+            const amount = (this.walletSelect.amount[this.walletSelect.amount.length - 1].value - this.walletSelect.amount[0].value).toFixed(2)
+            this.walletSelect.percentage = ((Number(amount) * 100) / this.walletSelect.amount[0].value).toFixed(2)
+        }
     },
     beforeRouteEnter (to, from, next) {
         const user = JSON.parse(localStorage.getItem('user'))

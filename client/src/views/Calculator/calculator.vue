@@ -31,12 +31,6 @@
                                 <template slot="append">% ao ano</template>
                             </el-input>
                         </div>
-                        <!-- <div class="input ipca-tax">
-                            <strong class="title">Taxa IPCA</strong>
-                            <el-input placeholder="6,4" v-model="taxIpca">
-                                <template slot="append">% ao ano</template>
-                            </el-input>
-                        </div> -->
                         <div class="input cdb-lc">
                             <strong class="title">CDB/LC</strong>
                             <el-input placeholder="83" v-model="cdb">
@@ -62,8 +56,8 @@
                     <div class="results">
                         <div class="result poupanca">
                             <strong class="title">Poupança</strong>
-                            <span class="stat">Valor líquido: R$ {{profit.poupanca}}</span>
-                            <el-progress :text-inside="false" :stroke-width="18" :percentage="4.5" color="rgba(142, 113, 199, 0.7)"></el-progress>
+                            <span class="stat">Valor líquido: R$ {{profit.poupanca.total}}</span>
+                            <el-progress :text-inside="true" :stroke-width="18" :percentage="profit.poupanca.profit" color="rgba(142, 113, 199, 0.7)"></el-progress>
                         </div>
                         <div class="result">
                             <strong class="title">CDB</strong>
@@ -72,12 +66,12 @@
                                 <el-badge :value="taxes + '%'" class="item"><span class="stat">Imposto de Renda: R$ {{profit.cdb.taxes}}</span></el-badge>
                             </div>
                             <span class="stat">Valor Líquido: R$ {{profit.cdb.amount}}</span>
-                            <el-progress :text-inside="false" :stroke-width="18" :percentage="4.3" color="rgba(142, 113, 199, 0.7)"></el-progress>
+                            <el-progress :text-inside="true" :stroke-width="18" :percentage="profit.cdb.profit" color="rgba(142, 113, 199, 0.7)"></el-progress>
                         </div>
                         <div class="result">
                             <strong class="title">LCI</strong>
-                            <span class="stat">Valor Líquido: R$ {{profit.lci}}</span>
-                            <el-progress :text-inside="false" :stroke-width="18" :percentage="5.8" color="rgba(142, 113, 199, 0.7)"></el-progress>
+                            <span class="stat">Valor Líquido: R$ {{profit.lci.total}}</span>
+                            <el-progress :text-inside="true" :stroke-width="18" :percentage="profit.lci.profit" color="rgba(142, 113, 199, 0.7)"></el-progress>
                         </div>
                         <div class="result">
                             <strong class="title">Tesouro SELIC</strong>
@@ -86,7 +80,7 @@
                                 <el-badge :value="taxes + '%'" class="item"><span class="stat">Imposto de Renda: R$ {{profit.selic.taxes}}</span></el-badge>
                             </div>
                             <span class="stat">Valor Líquido: R$ {{profit.selic.amount}}</span>
-                            <el-progress :text-inside="false" :stroke-width="18" :percentage="4.8" color="rgba(142, 113, 199, 0.7)"></el-progress>
+                            <el-progress :text-inside="true" :stroke-width="18" :percentage="profit.selic.profit" color="rgba(142, 113, 199, 0.7)"></el-progress>
                         </div>
                     </div>
                 </div>
@@ -113,16 +107,24 @@ export default {
             taxIpca: 6.4,
             taxes: 20,
             profit: {
-                poupanca: 4.55,
+                poupanca: {
+                    total: 4.55,
+                    profit: 4.6
+                },
                 cdb: {
                     total: 5.31,
                     taxes: 1.06,
+                    profit: 4.2,
                     amount: 4.25
                 },
-                lci: 5.82,
+                lci: {
+                    total: 5.82,
+                    profit: 5.8
+                },
                 selic: {
                     total: 6.4,
                     taxes: 1.28,
+                    profit: 4.8,
                     amount: 4.82
                 }
             }
@@ -137,22 +139,30 @@ export default {
         },
         PoupancaProfit (initialValue, selic, months) {
             if(selic <= 8.5) selic = selic * 0.7
-            this.profit.poupanca = (this.CompoundInterest(initialValue, this.MonthTax(selic), months) - initialValue).toFixed(2)
+            this.profit.poupanca.total = (this.CompoundInterest(initialValue, this.MonthTax(selic), months) - initialValue).toFixed(2)
+            if(initialValue > 0)
+                this.profit.poupanca.profit = ((this.profit.poupanca.total / initialValue) * 100).toFixed(1)
         },
         CdbProfit (initialValue, cdb, di, months, taxes) {
             let amount = this.CompoundInterest(initialValue, this.MonthTax(cdb * di / 100), months)
             this.profit.cdb.total = (amount - initialValue).toFixed(2)
             this.profit.cdb.taxes = (this.profit.cdb.total * (taxes / 100)).toFixed(2)
             this.profit.cdb.amount = (this.profit.cdb.total - this.profit.cdb.taxes).toFixed(2)
+            if(initialValue > 0)
+                this.profit.cdb.profit = ((this.profit.cdb.total / initialValue) * 100).toFixed(1)
         },
         LciProfit (initialValue, lci, di, months) {
-            this.profit.lci = (this.CompoundInterest(initialValue, this.MonthTax(lci * di / 100), months) - initialValue).toFixed(2)
+            this.profit.lci.total = (this.CompoundInterest(initialValue, this.MonthTax(lci * di / 100), months) - initialValue).toFixed(2)
+            if(initialValue > 0)
+                this.profit.lci.profit = ((this.profit.lci.total / initialValue) * 100).toFixed(1)
         },
         SelicProfit (initialValue, selic, months, taxes) {
             let amount = this.CompoundInterest(initialValue, this.MonthTax(selic), months)
             this.profit.selic.total = (amount - initialValue).toFixed(2)
             this.profit.selic.taxes = (this.profit.selic.total * (taxes / 100)).toFixed(2)
             this.profit.selic.amount = (this.profit.selic.total - this.profit.selic.taxes).toFixed(2)
+            if(initialValue > 0)
+                this.profit.selic.profit = ((this.profit.selic.total / initialValue) * 100).toFixed(1)
         }
     },
     watch: {

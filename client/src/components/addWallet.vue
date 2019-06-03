@@ -65,7 +65,7 @@ export default {
 
             this.loading = true
             const params = { login: this.user.login, name: this.name, type: this.type, value: this.value, date: this.date }
-
+            
             this.$node.post('users/wallet/create', params)
             .then(({ data }) => { this.$eventBus.$emit('WalletAdded', data) })
             .catch(err => console.log(err))
@@ -109,7 +109,7 @@ export default {
         >.form-wrapper {
             display: flex;
             flex-direction: column;
-            >.type, .value, .date, .name {
+            >.type, .paper, .value, .date, .name {
                 display: flex;
                 width: 100%;
                 margin-bottom: 10px;

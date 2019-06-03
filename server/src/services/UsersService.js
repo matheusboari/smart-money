@@ -1,4 +1,5 @@
 import UsersRepository from '../repositories/UsersRepository'
+import axios from 'axios'
 
 class UsersService {
     constructor () {
@@ -7,21 +8,90 @@ class UsersService {
 
     async createWallet (query) {
         const user = await UsersRepository.getOne({ login: query.login })
+        let amount = Number(query.value)
+        let amountArr = []
+        let percentage = []
+        query.date = moment(query.date).unix()
+        amountArr.push({
+            value: query.value,
+            date: query.date
+        })
+        if(query.type == 'selic') { //Selic
+            await axios.get('https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados?formato=json')
+            .then(({data}) => {
+                data.map(tax => {
+                    const date = moment(tax.data, 'DD/MM/YYYY')
+                    if(date.unix() >= query.date) {
+                        const daily = this.DailyTax(tax.valor)
+                        amount += Number(amount) * Number(daily)
+                        amountArr.push({
+                            value: amount.toFixed(2),
+                            date: date.unix()
+                        })
+                        percentage.push({
+                            value: Number(daily),
+                            date: date.unix()
+                        })
+                    }
+                })
+            })
+            .catch(err => console.log(err))
+        } else if(query.type == 'ipca') { //IPCA
+            await axios.get('https://api.bcb.gov.br/dados/serie/bcdata.sgs.10841/dados?formato=json')
+            .then(({data}) => {
+                data.map(tax => {
+                    const date = moment(tax.data, 'DD/MM/YYYY')
+                    if(date.unix() >= query.date) {
+                        const daily = this.DailyTax(tax.valor)
+                        amount += Number(amount) * Number(daily)
+                        amountArr.push({
+                            value: amount.toFixed(2),
+                            date: date.unix()
+                        })
+                        percentage.push({
+                            value: Number(daily),
+                            date: date.unix()
+                        })
+                    }
+                })
+            })
+            .catch(err => console.log(err))
+        } else if(query.type == 'cdi') { //CDI
+            await axios.get('https://api.bcb.gov.br/dados/serie/bcdata.sgs.4176/dados?formato=json')
+            .then(({data}) => {
+                data.map(tax => {
+                    const date = moment(tax.data, 'DD/MM/YYYY')
+                    if(date.unix() >= query.date) {
+                        const daily = this.DailyTax(tax.valor)
+                        amount += Number(amount) * Number(daily)
+                        amountArr.push({
+                            value: amount.toFixed(2),
+                            date: date.unix()
+                        })
+                        percentage.push({
+                            value: Number(daily),
+                            date: date.unix()
+                        })
+                    }
+                })
+            })
+            .catch(err => console.log(err))
+        }
+
         const newWallet = {
             name: query.name,
-            amount: [{
-                value: query.value,
-                date: query.date
-            }],
+            amount: amountArr,
             indexer: {
                 name: query.type,
-                percentage: []
+                percentage
             },
             startDate: query.date,
             endDate: null,
             stop: false
         }
+        
         user.wallet.push(newWallet)
+
         UsersRepository.update(user._id, {
             $set: {
                 wallet: user.wallet
@@ -31,6 +101,10 @@ class UsersService {
         })
         
         return user
+    }
+
+    DailyTax (monthTax) {
+        return Math.pow((1 + (monthTax / 100)), (1/30)) - 1
     }
 
     async deleteAccount (id) {
