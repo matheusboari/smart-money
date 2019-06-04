@@ -114,7 +114,15 @@ class UsersService {
     }
 
     async deleteAccount (id) {
-        return UsersRepository.delete(id, (err, data) => { if(err) console.log(err) })
+        let result = true
+        await UsersRepository.delete(id, (err, data) => { 
+            if(err) {
+                result = false
+                console.log(err)
+            }
+        })
+
+        return result
     }
 
     async register(query) {

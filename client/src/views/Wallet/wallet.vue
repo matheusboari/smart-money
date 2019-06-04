@@ -105,7 +105,7 @@ export default {
             this.loading = true
             this.$node.delete(`/users/delete/${this.user._id}`)
             .then(({data}) => {
-                if(data.n == 1) {
+                if(data) {
                     localStorage.clear()
                     location.reload()
                 } else this.$swal('Oops...', 'Ocorreu um erro interno.', 'error')
