@@ -5,38 +5,43 @@
         <div class="novice-trails">
             <div class="title-wrapper">
                 <h1 class="title">Trilhas para iniciantes</h1>
-                <h3 class="subtitle">Algo para o subtitle informando coisas básicas sobre trilhas para iniciantes</h3>
+                <h3 class="subtitle">Um caminho para quem deseja começar a conhecer investimentos em renda fixa.</h3>
             </div>
 
             <div class="trails">
                 <div class="cdi trail">
                     <h2 class="title">Trilha de Introdução</h2>
-                    <span class="description">Descrição da trilha sobre Introdução</span>
+                    <span class="description">Uma breve intrudoção aos investimentos de renda fixa.</span>
                 </div>
 
                 <div class="selic trail">
-                    <h2 class="title">Trilha de SELIC</h2>
-                    <span class="description">Descrição da trilha sobre SELIC</span>
+                    <h2 class="title">O que são taxas e tributos</h2>
+                    <span class="description">O que você precisa saber sobre taxas e tributos.</span>
                 </div>
 
                 <div class="ipca trail">
-                    <h2 class="title">Trilha de IPCA</h2>
-                    <span class="description">Descrição da trilha sobre IPCA</span>
+                    <h2 class="title">Juros simples e Juros Compostos</h2>
+                    <span class="description">Tudo sobre juros simples e juros compostos.</span>
                 </div>
 
                 <div class="igpm trail">
-                    <h2 class="title">Trilha de IGPM</h2>
-                    <span class="description">Descrição da trilha sobre IGPM</span>
-                </div>
-
-                <div class="igpdi trail">
-                    <h2 class="title">Trilha de IGPDI</h2>
-                    <span class="description">Descrição da trilha sobre IGPDI</span>
+                    <h2 class="title">Investimentos pré-fixados</h2>
+                    <span class="description">Introdução aos investimentos pré-fixados.</span>
                 </div>
 
                 <div class="poupanca trail">
-                    <h2 class="title">Trilha de POUPANÇA</h2>
-                    <span class="description">Descrição da trilha sobre POUPANÇA</span>
+                    <h2 class="title">Investimentos pós-fixados</h2>
+                    <span class="description">Introdução aos investimentos pós-fixados.</span>
+                </div>
+
+                <div class="igpdi trail">
+                    <h2 class="title">Indexadores econômicos</h2>
+                    <span class="description">Tudo sobre indexadores econômicos.</span>
+                </div>
+
+                <div class="tesouro trail">
+                    <h2 class="title">Introdução ao tesouro direto</h2>
+                    <span class="description">Introdução sobre a aplicação em tesouro direto.</span>
                 </div>
             </div>
         </div>
@@ -91,6 +96,7 @@ $bgWidth: 10000px;
             >.igpm { color: $igpmColor }
             >.igpdi { color: $igpdiColor }
             >.poupanca { color: $poupancaColor }
+            >.tesouro { color: $tesouroColor }
             >.trail {
                 border-radius: 4px;
                 width: 250px;
