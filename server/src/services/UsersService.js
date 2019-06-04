@@ -103,6 +103,12 @@ class UsersService {
         return user
     }
 
+    async deleteWallet (user) {
+        UsersRepository.update(user._id, user, (err, data) => {
+            if (err) console.log(err)
+        })
+    }
+
     DailyTax (monthTax) {
         return Math.pow((1 + (monthTax / 100)), (1/30)) - 1
     }

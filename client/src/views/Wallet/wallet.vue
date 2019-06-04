@@ -9,7 +9,7 @@
                    <h3 class="title">Adicionar Carteira</h3>
                </div>
                <div class="new-wallet" v-for="(wallet, i) in wallets" :key="i" 
-                    @click="walletSelect = wallet">
+                    @click="walletSelect = wallet; index = i">
                    <i class="el-icon-wallet icon"></i>
                    <h3 class="title">{{wallet.name}}</h3>
                </div>
@@ -46,6 +46,7 @@
                        <div class="update">ATUALIZADO: {{walletSelect.amount[walletSelect.amount.length - 1].date | moment('DDMMMYYYY')}}</div>
                    </div>
                    <line-chart :chartData="dataChart" :options="options" />
+                   <div class="delete-button" @click="DeleteWallet">EXCLUIR CARTEIRA</div>
                </div>
                <div class="wallet-side-else" v-else>
                    Sem carteira selecionada
@@ -70,6 +71,7 @@ export default {
         return {
             user: localStorage.getItem('user'),
             wallets: [],
+            index: null,
             walletSelect: null,
             addWallet: false,
             loading: false,
@@ -84,6 +86,20 @@ export default {
         Logout () {
             localStorage.clear()
             location.reload()
+        },
+        DeleteWallet () {
+            this.loading = true
+            this.user.wallet.splice(this.index, 1)
+            this.$node.put('/users/delete/wallet', this.user)
+            .then(({data}) => {
+                this.walletSelect = null
+                this.index = null
+                this.dataChart = null
+                this.wallets = this.user.wallet
+                localStorage.setItem('user', JSON.stringify(this.user))
+            })
+            .catch(err => console.log(err))
+            .finally(() => this.loading = false)
         },
         DeleteAccount () {
             this.loading = true
@@ -201,6 +217,7 @@ export default {
         max-width: 1050px;
         margin: auto;
         margin-top: 50px;
+        margin-bottom: 50px;
         >.profile-side {
             display: flex;
             flex-direction: column;
@@ -232,6 +249,11 @@ export default {
             flex-direction: column;
             align-items: center;
             padding: 0 20px;
+            >.delete-button {
+                margin-top: 50px;
+                color: #F98017;
+                cursor: pointer;
+            }
             >.header-infos {
                 width: 100%;
                 padding: 20px;
