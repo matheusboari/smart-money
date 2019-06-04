@@ -45,6 +45,7 @@
                        </div>
                        <div class="update">ATUALIZADO: {{walletSelect.amount[walletSelect.amount.length - 1].date | moment('DDMMMYYYY')}}</div>
                    </div>
+                   <line-chart :chartData="dataChart" :options="options" />
                </div>
                <div class="wallet-side-else" v-else>
                    Sem carteira selecionada
@@ -57,11 +58,13 @@
 <script>
 import primaryHeader from '../../components/primaryHeader.vue'
 import addWallet from '../../components/addWallet.vue'
+import lineChart from '../../components/lineChart.js'
 
 export default {
     components: {
         primaryHeader,
-        addWallet
+        addWallet,
+        lineChart
     },
     data () {
         return {
@@ -69,7 +72,12 @@ export default {
             wallets: [],
             walletSelect: null,
             addWallet: false,
-            loading: false
+            loading: false,
+            dataChart: null,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
         }
     },
     methods: {
@@ -88,6 +96,29 @@ export default {
             })
             .catch(err => console.log(err))
             .finally(() => this.loading = false)
+        },
+        ChangeChart (wallet) {
+            const amountSet = [],
+            initialSet = [],
+            labels = []
+
+            wallet.amount.map(a => {
+                amountSet.push(a.value)
+                initialSet.push(wallet.amount[0].value)
+                labels.push(this.$moment.unix(a.date).format("DD/MM"))
+            })
+            this.dataChart = {
+                labels: labels,
+                datasets: [{
+                    data: amountSet,
+                    label: "Aculumado",
+                    borderColor: "#3e95cd"
+                },{ 
+                    data: initialSet,
+                    label: "Inicial",
+                    borderColor: "#8e5ea2"
+                }]
+            }
         }
     },
     mounted () {
@@ -103,6 +134,7 @@ export default {
     },
     watch: {
         walletSelect () {
+            this.ChangeChart(this.walletSelect)
             const amount = (this.walletSelect.amount[this.walletSelect.amount.length - 1].value - this.walletSelect.amount[0].value).toFixed(2)
             this.walletSelect.percentage = ((Number(amount) * 100) / this.walletSelect.amount[0].value).toFixed(2)
         }
