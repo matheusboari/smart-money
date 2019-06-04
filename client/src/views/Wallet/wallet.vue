@@ -18,6 +18,7 @@
                <div class="profile-side">
                    <div class="name">{{user.name}}</div>
                    <div class="email">{{user.email}}</div>
+                    <div class="total">Pratimônio aculumado: R$ {{total}}</div>
 
                    <div class="logout-btn" @click="Logout">SAIR</div>
 
@@ -72,6 +73,7 @@ export default {
             user: localStorage.getItem('user'),
             wallets: [],
             index: null,
+            total: 0,
             walletSelect: null,
             addWallet: false,
             loading: false,
@@ -139,12 +141,20 @@ export default {
     },
     mounted () {
         this.user = JSON.parse(this.user)
+        this.user.wallet.map(wall => {
+            console.log(wall.amount[wall.amount.length - 1].value)
+            this.total += wall.amount[wall.amount.length - 1].value
+            console.log('total >>', 5008.6 + 3019.01)
+        })
         this.wallets = this.user.wallet
 
         this.$eventBus.$on('CloseAddWallet', () => { this.addWallet = false })
         this.$eventBus.$on('WalletAdded', data => {
             this.addWallet = false
             this.wallets = data.wallet
+            this.user.wallet.map(wall => {
+                this.total += wall.amount[wall.amount.length - 1].value
+            })
             localStorage.setItem('user', JSON.stringify(data))
         })
     },
@@ -223,7 +233,7 @@ export default {
             flex-direction: column;
             align-items: center;
             border-right: 1px solid rgba(51, 51, 51, .2);
-            >.name, .email {
+            >.name, .email, .total {
                 padding: 10px 0;
                 width: 50%;
                 border-bottom: 1px solid rgba(51, 51, 51, .2);
