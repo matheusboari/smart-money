@@ -99,6 +99,8 @@ export default {
                 this.dataChart = null
                 this.wallets = this.user.wallet
                 localStorage.setItem('user', JSON.stringify(this.user))
+                this.total = 0
+                this.user.wallet.map(wall => { this.total += wall.amount[wall.amount.length - 1].value; this.total.toFixed(2) })
             })
             .catch(err => console.log(err))
             .finally(() => this.loading = false)
@@ -141,20 +143,16 @@ export default {
     },
     mounted () {
         this.user = JSON.parse(this.user)
-        this.user.wallet.map(wall => {
-            console.log(wall.amount[wall.amount.length - 1].value)
-            this.total += wall.amount[wall.amount.length - 1].value
-            console.log('total >>', 5008.6 + 3019.01)
-        })
+        this.total = 0
+        this.user.wallet.map(wall => { this.total += wall.amount[wall.amount.length - 1].value; this.total.toFixed(2) })
         this.wallets = this.user.wallet
 
         this.$eventBus.$on('CloseAddWallet', () => { this.addWallet = false })
         this.$eventBus.$on('WalletAdded', data => {
             this.addWallet = false
             this.wallets = data.wallet
-            this.user.wallet.map(wall => {
-                this.total += wall.amount[wall.amount.length - 1].value
-            })
+            this.total = 0
+            this.user.wallet.map(wall => { this.total += wall.amount[wall.amount.length - 1].value; this.total.toFixed(2) })
             localStorage.setItem('user', JSON.stringify(data))
         })
     },
