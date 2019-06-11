@@ -48,6 +48,8 @@
                    </div>
                    <line-chart :chartData="dataChart" :options="options" />
                    <div class="delete-button" @click="DeleteWallet">EXCLUIR CARTEIRA</div>
+
+                   <div class="info">Base de dados retirada do <a class="link" href="https://www.bcb.gov.br/">Banco Central do Brasil</a></div>
                </div>
                <div class="wallet-side-else" v-else>
                    Sem carteira selecionada
@@ -257,6 +259,12 @@ export default {
             flex-direction: column;
             align-items: center;
             padding: 0 20px;
+            >.info {
+                margin-top: 20px;
+                >.link {
+                    color: #F98017;
+                }
+            }
             >.delete-button {
                 margin-top: 50px;
                 color: #F98017;

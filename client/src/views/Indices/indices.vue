@@ -32,6 +32,7 @@
                 <line-chart :chartData="dataChart" :options="options" />
             </div>
         </div>
+        <div class="info">Base de dados retirada do <a class="link" href="https://www.bcb.gov.br/">Banco Central do Brasil</a></div>
     </div>
 </template>
 
@@ -129,6 +130,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '~styles/settings/variables/colors';
+
+.info {
+    text-align: center;
+    margin: 20px 0;
+    >.link {
+        color: #F98017;
+    }
+}
 
 .indices-chart-wrapper {
     max-width: 1050px;
