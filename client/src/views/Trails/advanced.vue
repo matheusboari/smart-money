@@ -5,38 +5,38 @@
         <div class="advanced-trails">
             <div class="title-wrapper">
                 <h1 class="title">Trilhas para avançados</h1>
-                <h3 class="subtitle">Algo para o subtitle informando coisas básicas sobre trilhas para avançados</h3>
+                <h3 class="subtitle">Buscando atualizar todo seu conhecimento?</h3>
             </div>
 
             <div class="trails">
                 <div class="cdi trail">
-                    <h2 class="title">Trilha de CDI</h2>
-                    <span class="description">Descrição da trilha sobre CDI</span>
+                    <h2 class="title">Como calcular a rentabilidade do meu título</h2>
+                    <!-- <span class="description">Descrição da trilha sobre CDI</span> -->
                 </div>
 
                 <div class="selic trail">
-                    <h2 class="title">Trilha de SELIC</h2>
-                    <span class="description">Descrição da trilha sobre SELIC</span>
+                    <h2 class="title">Certificado de Recebíveis do Agronegócio</h2>
+                    <!-- <span class="description">Descrição da trilha sobre SELIC</span> -->
                 </div>
 
                 <div class="ipca trail">
-                    <h2 class="title">Trilha de IPCA</h2>
-                    <span class="description">Descrição da trilha sobre IPCA</span>
+                    <h2 class="title">Certificado de Recebíveis Imobiliários</h2>
+                    <!-- <span class="description">Descrição da trilha sobre IPCA</span> -->
                 </div>
 
                 <div class="igpm trail">
-                    <h2 class="title">Trilha de IGPM</h2>
-                    <span class="description">Descrição da trilha sobre IGPM</span>
+                    <h2 class="title">Debêntures</h2>
+                    <!-- <span class="description">Descrição da trilha sobre IGPM</span> -->
                 </div>
 
                 <div class="igpdi trail">
-                    <h2 class="title">Trilha de IGPDI</h2>
-                    <span class="description">Descrição da trilha sobre IGPDI</span>
+                    <h2 class="title">Letra de Câmbio</h2>
+                    <!-- <span class="description">Descrição da trilha sobre IGPDI</span> -->
                 </div>
 
                 <div class="poupanca trail">
-                    <h2 class="title">Trilha de POUPANÇA</h2>
-                    <span class="description">Descrição da trilha sobre POUPANÇA</span>
+                    <h2 class="title">Depósito a Prazo com Garantia Especial</h2>
+                    <!-- <span class="description">Descrição da trilha sobre POUPANÇA</span> -->
                 </div>
             </div>
         </div>
@@ -99,6 +99,7 @@ $bgWidth: 10000px;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
+                justify-content: center;
                 background-color: $white;
                 cursor: pointer;
                 >.title {
