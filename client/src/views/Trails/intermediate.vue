@@ -5,38 +5,38 @@
         <div class="intermediate-trails">
             <div class="title-wrapper">
                 <h1 class="title">Trilhas para intermediários</h1>
-                <h3 class="subtitle">Algo para o subtitle informando coisas básicas sobre trilhas para intermediários</h3>
+                <h3 class="subtitle">Para quem quer conhecer algo a mais sobre investimentos.</h3>
             </div>
 
             <div class="trails">
+                <router-link tag="div" :to="{name: 'cdb'}" class="igpdi trail">
+                    <h2 class="title">Trilha de CDB</h2>
+                    <span class="description">Saiba tudo sobre o investimento CDB</span>
+                </router-link>
+
                 <div class="cdi trail">
-                    <h2 class="title">Trilha de CDI</h2>
-                    <span class="description">Descrição da trilha sobre CDI</span>
+                    <h2 class="title">Fundo Garantidor de Créditos</h2>
+                    <span class="description">Conheça tudo sobre o fundo garantidor de créditos (FGC).</span>
                 </div>
 
                 <div class="selic trail">
-                    <h2 class="title">Trilha de SELIC</h2>
-                    <span class="description">Descrição da trilha sobre SELIC</span>
+                    <h2 class="title">Impostos incidentes</h2>
+                    <span class="description">Saiba quais são os impostos incidentes.</span>
                 </div>
 
                 <div class="ipca trail">
-                    <h2 class="title">Trilha de IPCA</h2>
-                    <span class="description">Descrição da trilha sobre IPCA</span>
+                    <h2 class="title">Entendendo os títulos do tesouro direto</h2>
+                    <span class="description">Conheça os títulos do tesouro direto.</span>
                 </div>
 
                 <div class="igpm trail">
-                    <h2 class="title">Trilha de IGPM</h2>
-                    <span class="description">Descrição da trilha sobre IGPM</span>
-                </div>
-
-                <div class="igpdi trail">
-                    <h2 class="title">Trilha de IGPDI</h2>
-                    <span class="description">Descrição da trilha sobre IGPDI</span>
+                    <h2 class="title">Juros semestrais</h2>
+                    <span class="description">Entenda como funciona os juros semestrais.</span>
                 </div>
 
                 <div class="poupanca trail">
-                    <h2 class="title">Trilha de POUPANÇA</h2>
-                    <span class="description">Descrição da trilha sobre POUPANÇA</span>
+                    <h2 class="title">Trilha de LCI e LCA</h2>
+                    <span class="description">Conheça os investimentos incentivados pelo governo.</span>
                 </div>
             </div>
         </div>
@@ -99,6 +99,7 @@ $bgWidth: 10000px;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
+                justify-content: center;
                 background-color: $white;
                 cursor: pointer;
                 >.title {

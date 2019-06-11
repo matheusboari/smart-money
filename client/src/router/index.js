@@ -13,6 +13,7 @@ import news from '../views/News/news.vue'
 import wallet from '../views/Wallet/wallet.vue'
 
 import intro from '../views/Trails/components/introduction.vue'
+import cdb from '../views/Trails/components/cdb.vue'
 
 Vue.use(Router)
 
@@ -21,6 +22,7 @@ export const constantRouterMap = [
     { path: '/trilhas/iniciante', name: 'novice', component: novice },
     { path: '/trilhas/iniciante/introducao', name: 'intro', component: intro },
     { path: '/trilhas/intermediario', name: 'intermediate', component: intermediate },
+    { path: '/trilhas/intermediario/cdb', name: 'cdb', component: cdb },
     { path: '/trilhas/avancado', name: 'advanced', component: advanced },
     { path: '', name: 'trailsDefault', component: trails },
     { path: '/indices', name: 'indices', component: indices },
