@@ -9,10 +9,10 @@
             </div>
 
             <div class="trails">
-                <div class="cdi trail">
+                <router-link tag="div" :to="{name: 'intro'}" class="cdi trail">
                     <h2 class="title">Trilha de Introdução</h2>
                     <span class="description">Uma breve intrudoção aos investimentos de renda fixa.</span>
-                </div>
+                </router-link>
 
                 <div class="selic trail">
                     <h2 class="title">O que são taxas e tributos</h2>
