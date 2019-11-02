@@ -28,7 +28,7 @@
     "express": "^4.15.4",
     "flow-bin": "^0.52.0",
     "moment": "^2.24.0",
-    "mongoose": "^5.4.19"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",
